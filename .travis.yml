@@ -1,7 +1,4 @@
-language: python
-
-python:
-  - '2.7'
+language: ruby
 
 sudo: required
 
@@ -16,3 +13,4 @@ before_install:
   - pip install -r requirements.txt
 
 script: bundle exec kitchen verify
+
