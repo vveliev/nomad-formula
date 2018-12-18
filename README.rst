@@ -10,8 +10,8 @@ A saltstack formula created to setup `Hashicorp's Nomad
     It is mandatory to have Go installed on a machine that will build Nomad.
     Nomad must run as root for it to be able to use all execution drivers.
 
-.. image:: https://travis-ci.org/saltstack-formulas/nomad-formula.svg?branch=master
-    :target: https://travis-ci.org/saltstack-formulas/nomad-formula
+.. image:: https://travis-ci.com/saltstack-formulas/nomad-formula.svg?branch=master
+    :target: https://travis-ci.com/saltstack-formulas/nomad-formula
 
 
 Available states
@@ -31,7 +31,10 @@ The essential Nomad state running both ``install`` and ``config``.
 Install the Nomad package from source, and register the appropriate service
 definition with systemd.
 
+
 This state can be called independently.
+
+Setting the pillar value `nomad:build` to `False` will install from binaries provided by Hashicorp.
 
 ``config``
 -----------
