@@ -1,16 +1,16 @@
 # -*- coding: utf-8 -*-
-# vim: ft=sls
+# vim: set softtabstop=2 tabstop=2 shiftwidth=2 expandtab autoindent ft=sls syntax=yaml:
 
 {%- from "nomad/map.jinja" import nomad with context %}
 
 nomad-config:
-  file.managed:
+  file.serialize:
     - name: {{ nomad.config_dir }}/nomad.hcl
-    - source: salt://nomad/files/nomad.hcl
-    - mode: 644
+    - formatter: json
+    - dataset_pillar: nomad:config
+    - mode: 640
     - user: root
     - group: root
-    - template: jinja
     {%- if nomad.service != False %}
     - watch_in:
        - service: nomad-service
