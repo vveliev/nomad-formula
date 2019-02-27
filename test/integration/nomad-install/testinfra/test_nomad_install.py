@@ -22,7 +22,7 @@ def test_config_file_created(File):
     assert file.is_file
     assert file.user == 'root'
     assert file.group == 'root'
-    assert oct(file.mode) == '0644'
+    assert oct(file.mode) == '0640'
 
 
 def test_data_dir_created(File):

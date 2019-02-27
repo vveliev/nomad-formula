@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# vim: ft=sls
+# vim: set softtabstop=2 tabstop=2 shiftwidth=2 expandtab autoindent ft=sls syntax=yaml:
 
 {% from "nomad/map.jinja" import nomad with context %}
 
