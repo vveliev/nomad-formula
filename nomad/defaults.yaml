@@ -3,11 +3,12 @@
 # service_hash is the SHA1 for the service file
 
 nomad:
-  bin_dir: '/usr/bin'
-  config_dir: '/etc/nomad'
-  version: '0.8.7'
+  use_local_service_file: False
+  bin_dir: "/usr/bin"
+  config_dir: "/etc/nomad.d"
+  version: "0.8.7"
   service_hash: fdc512a9e7e6a55303f12d4405676ec7c8116af6
   service: True
   build: False
   config:
-    data_dir: '/var/lib/nomad'
+    data_dir: "/var/lib/nomad"

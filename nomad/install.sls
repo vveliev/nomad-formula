@@ -134,8 +134,14 @@ nomad-install-binary:
 nomad-install-service:
   file.managed:
     - name: /etc/systemd/system/nomad.service
+    {% if nomad.use_local_service_file %}
+    - source: salt://nomad/files/nomad.service.j2
+    - context:
+        config_dir: {{ nomad.config_dir }}
+    {% else %}
     - source: https://raw.githubusercontent.com/hashicorp/nomad/v{{ nomad.version }}/dist/systemd/nomad.service
     - source_hash: {{ nomad.service_hash }}
+    {% endif %}
     - onchanges:
       - nomad-install-binary
   module.run:

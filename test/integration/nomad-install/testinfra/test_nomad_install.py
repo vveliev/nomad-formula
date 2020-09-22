@@ -8,7 +8,7 @@ def test_binary_created(File):
 
 
 def test_config_dir_created(File):
-    file = File('/etc/nomad')
+    file = File('/etc/nomad.d')
     assert file.exists
     assert file.is_directory
     assert file.user == 'root'
@@ -17,7 +17,7 @@ def test_config_dir_created(File):
 
 
 def test_config_file_created(File):
-    file = File('/etc/nomad/nomad.hcl')
+    file = File('/etc/nomad.d/nomad.hcl')
     assert file.exists
     assert file.is_file
     assert file.user == 'root'
