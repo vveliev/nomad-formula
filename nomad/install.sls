@@ -136,6 +136,9 @@ nomad-install-service:
     - name: /etc/systemd/system/nomad.service
     {% if nomad.use_local_service_file %}
     - source: salt://nomad/files/nomad.service.j2
+    - show_changes: true
+    - template: jinja
+    - keep_source: true
     - context:
         config_dir: {{ nomad.config_dir }}
     {% else %}
