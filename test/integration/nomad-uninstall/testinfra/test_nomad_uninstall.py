@@ -4,12 +4,12 @@ def test_binary_absent(File):
 
 
 def test_config_file_absent(File):
-    file = File('/etc/nomad/nomad.hcl')
+    file = File('/etc/nomad.d/nomad.hcl')
     assert not file.exists
 
 
 def test_config_dir_absent(File):
-    file = File('/etc/nomad')
+    file = File('/etc/nomad.d')
     assert not file.exists
 
 
