@@ -141,6 +141,7 @@ nomad-install-service:
     - keep_source: true
     - context:
         config_dir: {{ nomad.config_dir }}
+        bin_dir: {{ nomad.bin_dir }}
     {% else %}
     - source: https://raw.githubusercontent.com/hashicorp/nomad/v{{ nomad.version }}/dist/systemd/nomad.service
     - source_hash: {{ nomad.service_hash }}
