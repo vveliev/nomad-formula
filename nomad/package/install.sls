@@ -1,7 +1,15 @@
 # -*- coding: utf-8 -*-
-# vim: set softtabstop=2 tabstop=2 shiftwidth=2 expandtab autoindent ft=sls syntax=yaml:
+# vim: ft=sls
 
-{% from "nomad/map.jinja" import nomad with context %}
+{#- Get the `tplroot` from `tpldir` #}
+{%- set tplroot = tpldir.split('/')[0] %}
+{%- from tplroot ~ "/libs/map.jinja" import mapdata as nomad with context %}
+
+nomad-package-install-pkg-installed:
+  pkg.installed:
+    - name: {{ nomad.pkg.name }}
+
+
 
 nomad-bin-dir:
   file.directory:

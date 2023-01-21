@@ -1,7 +1,19 @@
 # -*- coding: utf-8 -*-
-# vim: set softtabstop=2 tabstop=2 shiftwidth=2 expandtab autoindent ft=sls syntax=yaml:
+# vim: ft=sls
 
-{% from "nomad/map.jinja" import nomad with context %}
+{#- Get the `tplroot` from `tpldir` #}
+{%- set tplroot = tpldir.split('/')[0] %}
+{%- set sls_service_clean = tplroot ~ '.service.clean' %}
+{%- from tplroot ~ "/libs/map.jinja" import mapdata as nomad with context %}
+
+include:
+  - {{ sls_service_clean }}
+
+nomad-config-clean-file-absent:
+  file.absent:
+    - name: {{ nomad.config }}
+    - require:
+      - sls: {{ sls_service_clean }}
 
 nomad-remove-service:
   service.dead:
@@ -15,11 +27,6 @@ nomad-remove-service:
     - onchanges:
       - file: nomad-remove-service
 
-nomad-remove-binary:
-   file.absent:
-    - name: {{ nomad.bin_dir }}/nomad
-    - require:
-      - nomad-remove-service
 
 nomad-remove-config:
     file.absent:
