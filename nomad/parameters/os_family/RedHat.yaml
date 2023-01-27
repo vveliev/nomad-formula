@@ -1,0 +1,23 @@
+# -*- coding: utf-8 -*-
+# vim: ft=yaml
+#
+# yamllint disable rule:line-length
+#
+# Set values specific to:
+#   salt['config.get']('os_family') == RedHat.
+#
+# You just need to add the key:values for this `os_family` that differ
+# from `defaults.yaml` + `<osarch>.yaml`.
+#
+# If you do not need to provide defaults via the `os_family` config,
+# you can remove this file or provide at least an empty dict, e.g.
+# values: {}
+---
+values:
+  pkg:
+    name: nomad-redhat
+  config: /etc/nomad.conf
+---
+# sudo yum install -y yum-utils
+# sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
+# sudo yum -y install nomad
