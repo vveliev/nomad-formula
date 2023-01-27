@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 # vim: ft=yaml
 #
+# yamllint disable rule:line-length
+#
 # Set values specific to:
 #   salt['config.get']('os') == Fedora.
 #
@@ -18,5 +20,5 @@ values:
     name: service-fedora
 ---
 # sudo dnf install -y dnf-plugins-core
-#  sudo dnf config-manager --add-repo https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
-#  sudo dnf -y install nomad
+# sudo dnf config-manager --add-repo https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
+# sudo dnf -y install nomad
