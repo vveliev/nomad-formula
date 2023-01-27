@@ -10,10 +10,10 @@
 include:
   - {{ sls_package_install }}
 
-nomad-config-file-file-managed:
+nomad-config-file-serevice:
   file.managed:
-    - name: {{ nomad.config }}
-    - source: {{ files_switch(['example.tmpl'],
+    - name: {{ nomad.config_dir }}/nomad.hcl
+    - source: {{ files_switch(['nomad_service_unit.jinja'],
                               lookup='nomad-config-file-file-managed'
                  )
               }}
@@ -27,20 +27,4 @@ nomad-config-file-file-managed:
     - context:
         nomad: {{ nomad | json }}
 
-
-
-{%- from "nomad/map.jinja" import nomad with context %}
-
-nomad-config:
-  file.serialize:
-    - name: {{ nomad.config_dir }}/nomad.hcl
-    - formatter: json
-    - dataset_pillar: nomad:config
-    - mode: 640
-    - user: root
-    - group: root
-    {%- if nomad.service != False %}
-    - watch_in:
-       - service: nomad-service
-    {%- endif %}
 

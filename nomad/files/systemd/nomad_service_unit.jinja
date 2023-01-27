@@ -3,7 +3,7 @@ Description="HashiCorp Consul - scheduler and orchestrator for managing containe
 Documentation=https://www.nomadproject.io/
 Requires=network-online.target
 After=network-online.target
-ConditionFileNotEmpty={{ config_dir }}config.json
+ConditionFileNotEmpty={{ config_dir }}/nomad.hcl
 
 [Service]
 User={{ user }}
@@ -12,8 +12,11 @@ ExecStart={{ bin_dir }}nomad client -config-dir={{ config_dir }}
 ExecReload={{ bin_dir }}nomad reload
 KillMode=process
 Restart=on-failure
-RestartSec=42s
+RestartSec=15s
+StartLimitBurst=3
+StartLimitIntervalSec=10
 LimitNOFILE=65536
+OOMScoreAdjust=-1000
 
 [Install]
 WantedBy=multi-user.target

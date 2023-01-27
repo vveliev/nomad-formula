@@ -23,7 +23,7 @@ nomad-config-dir:
 
 nomad-data-dir:
   file.directory:
-    - name: {{ nomad.config.data_dir }}
+    - name: {{ nomad.data_dir }}
     - makedirs: True
 
 {% if nomad.build %}
@@ -61,7 +61,7 @@ nomad-checkout-repository:
 
 nomad-build:
   cmd.run:
-    - names: 
+    - names:
       - 'make bootstrap'
       - 'make dev'
     - cwd: '/tmp/nomad-v{{ nomad.version }}/go/src/github.com/hashicorp/nomad'
@@ -113,14 +113,14 @@ nomad-cleanup-build:
     - onchanges:
       - nomad-build
 
-{% else %} 
+{% else %}
 nomad-install-binary:
   archive.extracted:
     - name: {{ nomad.bin_dir }}
     - source: https://releases.hashicorp.com/nomad/{{ nomad.version }}/nomad_{{ nomad.version }}_{{ grains['kernel'] | lower }}_{{ nomad.arch }}.zip
     - source_hash: https://releases.hashicorp.com/nomad/{{ nomad.version }}/nomad_{{ nomad.version }}_SHA256SUMS
     # If we don't force it here, the mere presence of an older version will prevent an upgrade.
-    - overwrite: True 
+    - overwrite: True
     # Hashicorp gives a zip with a single binary. Salt doesn't like that.
     - enforce_toplevel: False
     - require:
@@ -131,7 +131,7 @@ nomad-install-binary:
     - name: {{ nomad.bin_dir }}/nomad
     - user: root
     - group: root
-    - mode: 0755
+    - mode: "0755"
     - require:
       - archive: nomad-install-binary
   service.dead:

@@ -12,11 +12,12 @@ include:
 
 nomad-config-file-file-managed:
   file.managed:
-    - name: {{ nomad.config }}
-    - source: {{ files_switch(['example.tmpl'],
+    - name: {{ nomad.config_dir }}/nomad.hcl
+    - source: {{ files_switch(['nomad.hcl'],
                               lookup='nomad-config-file-file-managed'
                  )
               }}
+    - formatter: json
     - mode: 644
     - user: root
     - group: {{ nomad.rootgroup }}
@@ -26,19 +27,6 @@ nomad-config-file-file-managed:
       - sls: {{ sls_package_install }}
     - context:
         nomad: {{ nomad | json }}
-
-
-
-{%- from "nomad/map.jinja" import nomad with context %}
-
-nomad-config:
-  file.serialize:
-    - name: {{ nomad.config_dir }}/nomad.hcl
-    - formatter: json
-    - dataset_pillar: nomad:config
-    - mode: 640
-    - user: root
-    - group: root
     {%- if nomad.service != False %}
     - watch_in:
        - service: nomad-service
